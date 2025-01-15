@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="prdb_555l@dpg-cu2n72dds78s739c9n70-a.oregon-postgres.render.com" uuid="198486d2-5d7e-403d-9fcf-9c081e9e7f83">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://dpg-cu2n72dds78s739c9n70-a.oregon-postgres.render.com:5432/prdb_555l</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>

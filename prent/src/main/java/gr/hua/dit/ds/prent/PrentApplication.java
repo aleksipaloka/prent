@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PrentApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(PrentApplication.class, args);
 	}
 
