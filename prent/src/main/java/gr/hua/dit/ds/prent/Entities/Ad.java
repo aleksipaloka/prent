@@ -35,6 +35,10 @@ public class  Ad {
     @Column
     private Integer views;
 
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "PropertyID")
+    private Property property;
+
 
     public Ad(Integer adId, Integer propertyId, Date release_Date, Date last_Update, String availability, String comments, Integer contact_Number, Integer ownerId, Integer views) {
         AdId = adId;
