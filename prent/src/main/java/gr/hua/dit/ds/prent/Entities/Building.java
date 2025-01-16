@@ -1,12 +1,15 @@
 package gr.hua.dit.ds.prent.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
+import jakarta.persistence.*;
+import org.springframework.data.annotation.Reference;
 
 @Entity
-@Inheritance
-public class Building extends Property {
+public class Building {
+
+    @Id
+    @Column
+    private Integer BuildingID;
+
 
     @Column
     private Integer Floor;
@@ -35,11 +38,33 @@ public class Building extends Property {
     @Column
     private String Heat_System;
 
-    public Building(Integer propertyId, Float price, Float price_per_m2, String additional_info, String location, Float size, String type) {
-        super(propertyId, price, price_per_m2, additional_info, location, size, type);
+    public Property getProperty() {
+        return property;
     }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PropertyId")
+    private Property property;
+
+
 
     public Building() {
         super();
+    }
+
+    public Building(Integer floor, Integer construction_Year, Integer renovation_Year, Integer layers, Integer kitchens, Integer bathrooms, Integer living_Rooms, Integer bedrooms, String heat_System) {
+        Floor = floor;
+        Construction_Year = construction_Year;
+        Renovation_Year = renovation_Year;
+        Layers = layers;
+        Kitchens = kitchens;
+        Bathrooms = bathrooms;
+        Living_Rooms = living_Rooms;
+        Bedrooms = bedrooms;
+        Heat_System = heat_System;
     }
 }
