@@ -5,21 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4603cc4-0ea6-49ad-85f0-98d7092f5115" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/prent.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Ad.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Building.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/PrentApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/PrentApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Tenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Tenant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Repositories/AdRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Repositories/BuildingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Repositories/PersonRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Repositories/PropertyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Repositories/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Services/AdService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Services/BuildingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Services/PersonDetailsImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Services/PersonDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Services/PropertyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/198486d2-5d7e-403d-9fcf-9c081e9e7f83.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/198486d2-5d7e-403d-9fcf-9c081e9e7f83.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/198486d2-5d7e-403d-9fcf-9c081e9e7f83/storage_v2/_src_/database/prdb_555l.Vjy0dg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/198486d2-5d7e-403d-9fcf-9c081e9e7f83/storage_v2/_src_/database/prdb_555l.Vjy0dg/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/prent/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Ad.java" beforeDir="false" afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Ad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/src/main/java/gr/hua/dit/ds/prent/Entities/Tenant.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prent/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/prent/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/target/classes/gr/hua/dit/ds/prent/Entities/Ad.class" beforeDir="false" afterPath="$PROJECT_DIR$/prent/target/classes/gr/hua/dit/ds/prent/Entities/Ad.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/target/classes/gr/hua/dit/ds/prent/Entities/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/prent/target/classes/gr/hua/dit/ds/prent/Entities/Building.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/target/classes/gr/hua/dit/ds/prent/Entities/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/prent/target/classes/gr/hua/dit/ds/prent/Entities/Person.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prent/target/classes/gr/hua/dit/ds/prent/Entities/Property.class" beforeDir="false" afterPath="$PROJECT_DIR$/prent/target/classes/gr/hua/dit/ds/prent/Entities/Property.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +39,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -62,8 +73,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "backend__and__base",
-    "last_opened_file_path": "C:/Users/Αλεξ/Downloads/demo",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Αλεξ/ds-lab-2024",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -76,6 +87,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="gr.hua.dit.ds.prent.Repositories" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="PrentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />

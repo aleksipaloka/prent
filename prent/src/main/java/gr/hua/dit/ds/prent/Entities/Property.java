@@ -1,6 +1,7 @@
 package gr.hua.dit.ds.prent.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Property{
@@ -8,10 +9,11 @@ public class Property{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private Integer PropertyId;
+    private Integer PropertyID;
 
+    @NotBlank
     @Column
-    private Float Price;
+    private Double Price;
 
     @Column
     private Float Price_per_m2;
@@ -19,14 +21,17 @@ public class Property{
     @Column
     private String Additional_info;
 
+    @NotBlank
     @Column
     private String Location;
 
+    @NotBlank
     @Column
-    private Float Size;
+    private Double Size;
 
+    @NotBlank
     @Column
-    private String Type;
+    private String Property_Type;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "SysPersonID")
@@ -38,33 +43,31 @@ public class Property{
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
     private Ad ad;
 
-    public Property(Integer propertyId, Float price, Float price_per_m2, String additional_info, String location, Float size, String type) {
-        PropertyId = propertyId;
+    public Property() {
+    }
+
+    public Property(Double price, Float price_per_m2, String additional_info, String location, Double size, String property_Type) {
         Price = price;
         Price_per_m2 = price_per_m2;
         Additional_info = additional_info;
         Location = location;
         Size = size;
-        Type = type;
+        Property_Type = property_Type;
     }
 
-    public Property() {
-
+    public Integer getPropertyID() {
+        return PropertyID;
     }
 
-    public Integer getPropertyId() {
-        return PropertyId;
+    public void setPropertyID(Integer propertyID) {
+        PropertyID = propertyID;
     }
 
-    public void setPropertyId(Integer propertyId) {
-        PropertyId = propertyId;
-    }
-
-    public Float getPrice() {
+    public Double getPrice() {
         return Price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         Price = price;
     }
 
@@ -92,27 +95,59 @@ public class Property{
         Location = location;
     }
 
-    public Float getSize() {
+    public Double getSize() {
         return Size;
     }
 
-    public void setSize(Float size) {
+    public void setSize(Double size) {
         Size = size;
     }
 
-    public String getType() {
-        return Type;
+    public String getProperty_Type() {
+        return Property_Type;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public void setProperty_Type(String property_Type) {
+        Property_Type = property_Type;
     }
 
-    public Person getPerson() {
-        return person;
+    public Person getOwner() {
+        return owner;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public Ad getAd() {
+        return ad;
+    }
+
+    public void setAd(Ad ad) {
+        this.ad = ad;
+    }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "PropertyID=" + PropertyID +
+                ", Price=" + Price +
+                ", Price_per_m2=" + Price_per_m2 +
+                ", Additional_info='" + Additional_info + '\'' +
+                ", Location='" + Location + '\'' +
+                ", Size=" + Size +
+                ", Property_Type='" + Property_Type + '\'' +
+                ", owner=" + owner +
+                ", building=" + building +
+                ", ad=" + ad +
+                '}';
     }
 }
