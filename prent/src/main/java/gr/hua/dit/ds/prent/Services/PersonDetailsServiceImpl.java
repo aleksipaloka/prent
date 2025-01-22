@@ -30,8 +30,8 @@ public class PersonDetailsServiceImpl  {
     }
 
     @Transactional
-    public PersonDetails loadPersonByUsername(String username) throws UsernameNotFoundException {
-        Optional<Person> opt = PersonRepository.findByUsername(username);
+    public UserDetails loadPersonByUsername(String username) throws UsernameNotFoundException {
+        Optional<Person> opt = personRepository.findByUsername(username);
 
         if(opt.isEmpty())
             throw new UsernameNotFoundException("User with username: " +username +" not found !");
