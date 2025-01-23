@@ -1,7 +1,7 @@
 package gr.hua.dit.ds.prent.Services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import gr.hua.dit.ds.prent.Entities.Person;
+import gr.hua.dit.ds.prent.Entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class PersonDetailsImpl implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Long id;
 
     private String username;
 
@@ -26,7 +26,7 @@ public class PersonDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public PersonDetailsImpl(Integer id, String username, String email, String password,
+    public UserDetailsImpl(Long id, String username, String email, String password,
                              Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
@@ -35,16 +35,16 @@ public class PersonDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static PersonDetailsImpl build(Person person) {
-        List<GrantedAuthority> authorities = person.getRole().stream()
+    public static UserDetailsImpl build(User user) {
+        List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
 
-        return new PersonDetailsImpl(
-                person.getSysPersonID(),
-                person.getUsername(),
-                person.getE_mail(),
-                person.getPersonalPW(),
+        return new UserDetailsImpl(
+                user.getId(),
+                user.getUsername(),
+                user.getE_mail(),
+                user.getPersonalPW(),
                 authorities);
     }
 
@@ -53,7 +53,7 @@ public class PersonDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -97,7 +97,7 @@ public class PersonDetailsImpl implements UserDetails {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        PersonDetailsImpl person = (PersonDetailsImpl) o;
-        return Objects.equals(id, person.id);
+        UserDetailsImpl user = (UserDetailsImpl) o;
+        return Objects.equals(id, user.id);
     }
 }

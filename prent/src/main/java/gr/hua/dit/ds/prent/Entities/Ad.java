@@ -12,7 +12,7 @@ public class  Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private Integer AdID;
+    private Long AdID;
 
     @NotBlank
     @Column
@@ -32,32 +32,28 @@ public class  Ad {
     @Column
     private String Contact_Number;
 
-    @Column
-    private Integer views;
-
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "PropertyID")
     private Property property;
 
 
-    public Ad(Date release_Date, Date last_Update, String availability, String comments, String contact_Number, Integer views) {
+    public Ad(Date release_Date, Date last_Update, String availability, String comments, String contact_Number) {
         Release_Date = Date.valueOf(LocalDate.now());
         Last_Update = Date.valueOf(LocalDate.now());
         Availability = availability;
         Comments = comments;
         Contact_Number = contact_Number;
-        this.views = views;
     }
 
     public Ad() {
 
     }
 
-    public Integer getAdID() {
+    public Long getAdID() {
         return AdID;
     }
 
-    public void setAdID(Integer adID) {
+    public void setAdID(Long adID) {
         AdID = adID;
     }
 
@@ -101,14 +97,6 @@ public class  Ad {
         Contact_Number = contact_Number;
     }
 
-    public Integer getViews() {
-        return views;
-    }
-
-    public void setViews(Integer views) {
-        this.views = views;
-    }
-
     public Property getProperty() {
         return property;
     }
@@ -126,7 +114,6 @@ public class  Ad {
                 ", Availability='" + Availability + '\'' +
                 ", Comments='" + Comments + '\'' +
                 ", Contact_Number=" + Contact_Number +
-                ", views=" + views +
                 ", property=" + property +
                 '}';
     }

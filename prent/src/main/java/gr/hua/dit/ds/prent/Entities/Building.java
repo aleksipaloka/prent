@@ -8,7 +8,7 @@ public class Building {
 
     @Id
     @Column
-    private Integer BuildingID;
+    private Long BuildingID;
 
 
     @Column
@@ -58,11 +58,11 @@ public class Building {
 
     }
 
-    public Integer getBuildingID() {
+    public Long getBuildingID() {
         return BuildingID;
     }
 
-    public void setBuildingID(Integer buildingID) {
+    public void setBuildingID(Long buildingID) {
         BuildingID = buildingID;
     }
 

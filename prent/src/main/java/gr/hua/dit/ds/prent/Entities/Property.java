@@ -9,7 +9,7 @@ public class Property{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private Integer PropertyID;
+    private Long PropertyID;
 
     @NotBlank
     @Column
@@ -35,7 +35,7 @@ public class Property{
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "SysPersonID")
-    private Person owner;
+    private User owner;
 
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
     private Building building;
@@ -55,11 +55,11 @@ public class Property{
         Property_Type = property_Type;
     }
 
-    public Integer getPropertyID() {
+    public Long getPropertyID() {
         return PropertyID;
     }
 
-    public void setPropertyID(Integer propertyID) {
+    public void setPropertyID(Long propertyID) {
         PropertyID = propertyID;
     }
 
@@ -111,11 +111,11 @@ public class Property{
         Property_Type = property_Type;
     }
 
-    public Person getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Person owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 

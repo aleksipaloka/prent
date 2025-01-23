@@ -1,16 +1,16 @@
 package gr.hua.dit.ds.prent.Repositories;
 
-import gr.hua.dit.ds.prent.Entities.Person;
+import gr.hua.dit.ds.prent.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<Person> findByUsername(String username);
-    Optional<Person> findByEmail(String email);
+    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);

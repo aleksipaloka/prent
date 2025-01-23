@@ -32,11 +32,11 @@ public class AdService {
     }
 
     @Transactional
-    public Optional<Ad> getAd(Integer adId) {
+    public Optional<Ad> getAd(Long adId) {
         return adRepository.findById(adId);
     }
     @Transactional
-    public void assignPropertyToAd(int adId, Property property) {
+    public void assignPropertyToAd(Long adId, Property property) {
         Ad ad = adRepository.findById(adId).get();
         System.out.println(ad);
         System.out.println(ad.getProperty());
@@ -45,7 +45,7 @@ public class AdService {
         adRepository.save(ad);
     }
 
-    public boolean deleteAd(Integer adId) {
+    public boolean deleteAd(Long adId) {
         Optional<Ad> ad = adRepository.findById(adId);
 
         if (ad.isPresent()) {

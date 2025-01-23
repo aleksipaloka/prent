@@ -1,11 +1,11 @@
 package gr.hua.dit.ds.prent.Config;
 
 import gr.hua.dit.ds.prent.Entities.Ad;
-import gr.hua.dit.ds.prent.Entities.Person;
+import gr.hua.dit.ds.prent.Entities.User;
 import gr.hua.dit.ds.prent.Entities.Property;
 import gr.hua.dit.ds.prent.Entities.Role;
 import gr.hua.dit.ds.prent.Repositories.AdRepository;
-import gr.hua.dit.ds.prent.Repositories.PersonRepository;
+import gr.hua.dit.ds.prent.Repositories.UserRepository;
 import gr.hua.dit.ds.prent.Repositories.PropertyRepository;
 import gr.hua.dit.ds.prent.Repositories.RoleRepository;
 import jakarta.annotation.PostConstruct;
@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Configuration
@@ -24,18 +25,18 @@ public class InitialData {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InitialData.class);
 
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final AdRepository adRepository;
     private final PropertyRepository propertyRepository;
 
-    public InitialData(PersonRepository personRepository,
+    public InitialData(UserRepository userRepository,
                        RoleRepository roleRepository,
                        PasswordEncoder passwordEncoder,
                        AdRepository adRepository,
                        PropertyRepository propertyRepository) {
-        this.personRepository = personRepository;
+        this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.adRepository = adRepository;
@@ -46,7 +47,7 @@ public class InitialData {
     @PostConstruct
     public void populateDBWithInitialData() {
         this.roleRepository.deleteAll();
-        this.personRepository.deleteAll();
+        this.userRepository.deleteAll();
         this.adRepository.deleteAll();
         this.propertyRepository.deleteAll();
 
@@ -58,51 +59,60 @@ public class InitialData {
         roleTenant = this.roleRepository.updateOrInsert(roleTenant);
         roleOwner = this.roleRepository.updateOrInsert(roleOwner);
 
-        var existing = this.personRepository.findByUsername("admin").orElse(null);
+        var existing = this.userRepository.findByUsername("admin").orElse(null);
         if (existing == null) {
             LOGGER.info("Creating User 'admin'");
-            Person personAdmin = new Person();
-            personAdmin.setUsername("admin");
-            personAdmin.setPersonalPW(this.passwordEncoder.encode("admin"));
-            personAdmin.setE_mail("admin@hua.gr");
-            personAdmin.setRole(roleAdmin);
-            this.personRepository.save(personAdmin);
+            User userAdmin = new User();
+            userAdmin.setUsername("admin");
+            userAdmin.setPersonalPW(this.passwordEncoder.encode("admin"));
+            userAdmin.setE_mail("admin@hua.gr");
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleAdmin);
+            roles.add(roleOwner);
+            roles.add(roleTenant);
+            userAdmin.setRoles(roles);
+            this.userRepository.save(userAdmin);
         }
 
-        existing = this.personRepository.findByUsername("manager").orElse(null);
+        existing = this.userRepository.findByUsername("manager").orElse(null);
         if (existing == null) {
             LOGGER.info("Creating User 'tenant'");
-            Person personTenant = new Person();
-            personTenant.setUsername("tenant");
-            personTenant.setPersonalPW(this.passwordEncoder.encode("tenant"));
-            personTenant.setE_mail("tenant@hua.gr");
-            personTenant.setRole(roleTenant);
-            this.personRepository.save(personTenant);
+            User userTenant = new User();
+            userTenant.setUsername("tenant");
+            userTenant.setPersonalPW(this.passwordEncoder.encode("tenant"));
+            userTenant.setE_mail("tenant@hua.gr");
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleTenant);
+            userTenant.setRoles(roles);
+
+            this.userRepository.save(userTenant);
         }
 
-        existing = this.personRepository.findByUsername("owner").orElse(null);
+        existing = this.userRepository.findByUsername("owner").orElse(null);
         if (existing == null) {
             LOGGER.info("Creating User 'owner'");
-            Person personOwner = new Person();
-            personOwner.setUsername("owner");
-            personOwner.setPersonalPW(this.passwordEncoder.encode("owner"));
-            personOwner.setE_mail("user@hua.gr");
-            personOwner.setRole(roleOwner);
-            this.personRepository.save(personOwner);
+            User userOwner = new User();
+            userOwner.setUsername("owner");
+            userOwner.setPersonalPW(this.passwordEncoder.encode("owner"));
+            userOwner.setE_mail("user@hua.gr");
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleOwner);
+            userOwner.setRoles(roles);
+            this.userRepository.save(userOwner);
         }
 
-        var defaultProperty = this.propertyRepository.findById(1).orElse(null);
+        var defaultProperty = this.propertyRepository.findById(1L).orElse(null);
         if (defaultProperty == null) {
             defaultProperty = new Property();
             defaultProperty.setPrice(100000.00);
             defaultProperty.setLocation("Athens");
             defaultProperty.setSize(162.00);
             defaultProperty.setProperty_Type("Building");
-            defaultProperty.setOwner(this.personRepository.findByUsername("owner").orElse(null));
+            defaultProperty.setOwner(this.userRepository.findByUsername("owner").orElse(null));
             defaultProperty = this.propertyRepository.save(defaultProperty);
         }
 
-        var defaultad = this.adRepository.findById(1).orElse(null);
+        var defaultad = this.adRepository.findById(1L).orElse(null);
         if (defaultad == null) {
             defaultad = new Ad();
             defaultad.setContact_Number("6969696969");

@@ -1,22 +1,22 @@
 package gr.hua.dit.ds.prent.Entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "Username"),
         @UniqueConstraint(columnNames = "e-mail")})
-public class Person {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private Integer SysPersonID;
+    private Long Id;
 
     @NotBlank
     @Column
@@ -39,17 +39,16 @@ public class Person {
     private String Surname;
 
 
-    @OneToOne
-    @JoinTable(name = "Person_Roles",
-        joinColumns = @JoinColumn(name = "SysPersonID"),
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "User_Roles",
+        joinColumns = @JoinColumn(name = "Id"),
         inverseJoinColumns = @JoinColumn(name = "RoleID"))
-    private Role role;
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Property> property;
 
-    public Person(Integer sysPersonID, String username, String personalPW, String e_mail, String name, String surname) {
-        SysPersonID = sysPersonID;
+    public User(String username, String personalPW, String e_mail, String name, String surname) {
         this.Username = username;
         this.personalPW = personalPW;
         this.e_mail = e_mail;
@@ -57,16 +56,16 @@ public class Person {
         Surname = surname;
     }
 
-    public Person() {
+    public User() {
 
     }
 
-    public Integer getSysPersonID() {
-        return SysPersonID;
+    public Long getId() {
+        return Id;
     }
 
-    public void setSysPersonID(Integer sysPersonID) {
-        SysPersonID = sysPersonID;
+    public void setId(Long Id) {
+        Id = Id;
     }
 
     public String getUsername() {
@@ -117,24 +116,21 @@ public class Person {
         this.property = property;
     }
 
-    public Role getRole() {
-        return role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
-
-    public void setRole(Role role) {
-        this.role = role;
+    public Set<Role> getRoles() {
+        return roles;
     }
-
     @Override
     public String toString() {
         return "Person{" +
-                "SysPersonId=" + SysPersonID +
+                "SysPersonId=" + Id +
                 ", Username='" + Username + '\'' +
                 ", personalPW='" + personalPW + '\'' +
                 ", e_mail='" + e_mail + '\'' +
                 ", Name='" + Name + '\'' +
                 ", Surname='" + Surname + '\'' +
-                ", type='" + role + '\'' +
                 ", property=" + property +
                 '}';
     }
