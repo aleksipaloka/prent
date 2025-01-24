@@ -34,7 +34,7 @@ public class Property{
     private String Property_Type;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "SysPersonID")
+    @JoinColumn(name = "UserId")
     private User owner;
 
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)

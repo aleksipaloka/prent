@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="username"> User Name</label>
+            <input type="text" class="form-control"  name="username" id="username"/>
+        </div>
+        <div class="form-group">
+            <label for="password"> Password </label>
+            <input type="password" class="form-control"  id="password" name="password"/>
+        </div>
+        <div class="form-group">
+            <label for="role"> Role:</label>
+            <select id="role" name="role">
+                <option value="Tenant">Tenant</option>
+                <option value="Owner">Owner</option>
+            </select>
+        </div>
+        <div><input type="submit" class="btn btn-primary" value="Sign In"/></div>
+    </form>
+</div>
+</body>
+</html>

@@ -22,12 +22,13 @@ public class AuthController {
         Role role_owner = new Role("ROLE_OWNER");
         Role role_admin = new Role("ROLE_ADMIN");
 
+        roleRepository.updateOrInsert(role_tenant);
         roleRepository.updateOrInsert(role_owner);
         roleRepository.updateOrInsert(role_admin);
     }
 
     @GetMapping("/login")
     public String login() {
-        return "auth/login";
+        return "Auth/login";
     }
 }

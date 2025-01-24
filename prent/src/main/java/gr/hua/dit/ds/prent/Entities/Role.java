@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long RoleId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column
     private String name;
@@ -21,11 +21,11 @@ public class Role {
     }
 
     public Long getRoleId() {
-        return RoleId;
+        return id;
     }
 
-    public void setRoleId(Long RoleId) {
-        RoleId = RoleId;
+    public void setRoleId(Long id) {
+        id = id;
     }
 
     public String getName() {

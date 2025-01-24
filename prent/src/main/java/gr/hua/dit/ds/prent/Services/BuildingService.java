@@ -34,11 +34,11 @@ public class BuildingService {
     }
 
     @Transactional
-    public Optional<Building> getBuilding(Integer buildingId) {
+    public Optional<Building> getBuilding(Long buildingId) {
         return buildingRepository.findById(buildingId);
     }
     @Transactional
-    public void assignPropertyToAd(int buildingId, Property property) {
+    public void assignPropertyToAd(Long buildingId, Property property) {
         Building building = buildingRepository.findById(buildingId).get();
         System.out.println(building);
         System.out.println(building.getProperty());
@@ -47,7 +47,7 @@ public class BuildingService {
         buildingRepository.save(building);
     }
 
-    public boolean deleteAd(Integer buildingId) {
+    public boolean deleteAd(Long buildingId) {
         Optional<Building> building = buildingRepository.findById(buildingId);
 
         if (building.isPresent()) {

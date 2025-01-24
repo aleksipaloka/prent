@@ -4,7 +4,7 @@ import gr.hua.dit.ds.prent.Entities.Ad;
 import gr.hua.dit.ds.prent.Entities.Property;
 import gr.hua.dit.ds.prent.Repositories.AdRepository;
 import gr.hua.dit.ds.prent.Repositories.PropertyRepository;
-import io.jsonwebtoken.lang.Collections;
+//import io.jsonwebtoken.lang.Collections;
 import jakarta.transaction.Transactional;
 
 import java.util.List;

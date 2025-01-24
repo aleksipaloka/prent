@@ -2,7 +2,8 @@ package gr.hua.dit.ds.prent.Controllers;
 
 import gr.hua.dit.ds.prent.Entities.User;
 import gr.hua.dit.ds.prent.Repositories.RoleRepository;
-import gr.hua.dit.ds.prent.Services.UserDetailsServiceImpl;
+
+import gr.hua.dit.ds.prent.Services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-    private UserDetailsServiceImpl userService;
+    private UserService userService;
 
     private RoleRepository roleRepository;
 
-    public UserController(UserDetailsServiceImpl userService, RoleRepository roleRepository) {
+    public UserController(UserService userService, RoleRepository roleRepository) {
         this.userService = userService;
         this.roleRepository = roleRepository;
     }
@@ -26,13 +27,21 @@ public class UserController {
     public String register(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "auth/register";
+        return "Auth/register";
     }
 
-    @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute User user, Model model){
-        Long id = userService.saveUser(user);
-        String message = "User '"+id+"' saved successfully !";
+    @PostMapping("/saveTenant")
+    public String saveTenant(@ModelAttribute User tenant, Model model){
+        Long id = userService.saveTenant(tenant);
+        String message = "Tenant '"+id+"' saved successfully !";
+        model.addAttribute("msg", message);
+        return "index";
+    }
+
+    @PostMapping("/saveOwner")
+    public String saveOwner(@ModelAttribute User owner, Model model){
+        Long id = userService.saveOwner(owner);
+        String message = "Owner '"+id+"' saved successfully !";
         model.addAttribute("msg", message);
         return "index";
     }
@@ -41,13 +50,13 @@ public class UserController {
     public String showUsers(Model model){
         model.addAttribute("users", userService.getUsers());
         model.addAttribute("roles", roleRepository.findAll());
-        return "auth/users";
+        return "Auth/users";
     }
 
     @GetMapping("/user/{user_id}")
     public String showUser(@PathVariable Long user_id, Model model){
         model.addAttribute("user", userService.getUser(user_id));
-        return "auth/user";
+        return "Auth/user";
     }
 
     @PostMapping("/user/{user_id}")
@@ -57,6 +66,6 @@ public class UserController {
         the_user.setUsername(user.getUsername());
         userService.updateUser(the_user);
         model.addAttribute("users", userService.getUsers());
-        return "auth/users";
+        return "Auth/users";
     }
 }
