@@ -30,12 +30,6 @@ public class User {
     @Email
     private String email;
 
-    @NotBlank
-    private String Name;
-
-    @NotBlank
-    private String Surname;
-
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "User_Roles",
@@ -46,12 +40,10 @@ public class User {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Property> property;
 
-    public User(String username, String personalPW, String e_mail, String name, String surname) {
+    public User(String username, String personalPW, String e_mail) {
         this.username = username;
         this.personalPW = personalPW;
         this.email = e_mail;
-        Name = name;
-        Surname = surname;
     }
 
     public User() {
@@ -90,22 +82,6 @@ public class User {
         this.email = e_mail;
     }
 
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getSurname() {
-        return Surname;
-    }
-
-    public void setSurname(String surname) {
-        Surname = surname;
-    }
-
     public List<Property> getProperty() {
         return property;
     }
@@ -126,8 +102,6 @@ public class User {
                 "SysPersonId=" + Id +
                 ", Username='" + username + '\'' +
                 ", e_mail='" + email + '\'' +
-                ", Name='" + Name + '\'' +
-                ", Surname='" + Surname + '\'' +
                 '}';
     }
 }

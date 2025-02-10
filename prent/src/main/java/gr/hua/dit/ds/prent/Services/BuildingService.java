@@ -38,7 +38,7 @@ public class BuildingService {
         return buildingRepository.findById(buildingId);
     }
     @Transactional
-    public void assignPropertyToAd(Long buildingId, Property property) {
+    public void assignPropertyToBuilding(Long buildingId, Property property) {
         Building building = buildingRepository.findById(buildingId).get();
         System.out.println(building);
         System.out.println(building.getProperty());
@@ -47,7 +47,7 @@ public class BuildingService {
         buildingRepository.save(building);
     }
 
-    public boolean deleteAd(Long buildingId) {
+    public boolean deleteBuilding(Long buildingId) {
         Optional<Building> building = buildingRepository.findById(buildingId);
 
         if (building.isPresent()) {

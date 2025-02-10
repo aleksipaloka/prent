@@ -36,7 +36,7 @@ public class PropertyService {
         return propertyRepository.findById(propertyId);
     }
     @Transactional
-    public void assignPersonToProperty(Long propertyId, User owner) {
+    public void assignOwnerToProperty(Long propertyId, User owner) {
         Property property = propertyRepository.findById(propertyId).get();
         System.out.println(property);
         System.out.println(property.getOwner());
@@ -45,11 +45,11 @@ public class PropertyService {
         propertyRepository.save(property);
     }
 
-    public boolean deleteAd(Long buildingId) {
-        Optional<Property> building = propertyRepository.findById(buildingId);
+    public boolean deleteProperty(Long propertyId) {
+        Optional<Property> building = propertyRepository.findById(propertyId);
 
         if (building.isPresent()) {
-            propertyRepository.deleteById(buildingId);
+            propertyRepository.deleteById(propertyId);
             return true;
         }
         else {

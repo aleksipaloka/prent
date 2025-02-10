@@ -33,6 +33,9 @@ public class Property{
     @Column
     private String Property_Type;
 
+    @Column
+    private String Status;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "UserId")
     private User owner;
@@ -48,11 +51,12 @@ public class Property{
 
     public Property(Double price, Float price_per_m2, String additional_info, String location, Double size, String property_Type) {
         Price = price;
-        Price_per_m2 = price_per_m2;
+        Price_per_m2 = (float) (price/size);
         Additional_info = additional_info;
         Location = location;
         Size = size;
         Property_Type = property_Type;
+        Status = "PENDING";
     }
 
     public Long getPropertyID() {
@@ -149,5 +153,13 @@ public class Property{
                 ", building=" + building +
                 ", ad=" + ad +
                 '}';
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }

@@ -3,31 +3,34 @@ package gr.hua.dit.ds.prent.Controllers;
 import gr.hua.dit.ds.prent.Entities.User;
 import gr.hua.dit.ds.prent.Repositories.RoleRepository;
 
-import gr.hua.dit.ds.prent.Services.UserService;
+import gr.hua.dit.ds.prent.Repositories.UserRepository;
+import gr.hua.dit.ds.prent.Services.UserDetailsImpl;
+import gr.hua.dit.ds.prent.Services.UserDetailsServiceImpl;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private UserDetailsServiceImpl userService;
 
     private RoleRepository roleRepository;
 
-    public UserController(UserService userService, RoleRepository roleRepository) {
+    private UserRepository userRepository;
+
+    public UserController(UserDetailsServiceImpl userService, RoleRepository roleRepository, UserRepository userRepository) {
         this.userService = userService;
         this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/register")
     public String register(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "Auth/register";
+        return "auth/register";
     }
 
     @PostMapping("/saveTenant")
@@ -46,19 +49,6 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/users")
-    public String showUsers(Model model){
-        model.addAttribute("users", userService.getUsers());
-        model.addAttribute("roles", roleRepository.findAll());
-        return "Auth/users";
-    }
-
-    @GetMapping("/user/{user_id}")
-    public String showUser(@PathVariable Long user_id, Model model){
-        model.addAttribute("user", userService.getUser(user_id));
-        return "Auth/user";
-    }
-
     @PostMapping("/user/{user_id}")
     public String saveUser(@PathVariable Long user_id, @ModelAttribute("user") User user, Model model) {
         User the_user = (User) userService.getUser(user_id);
@@ -66,6 +56,33 @@ public class UserController {
         the_user.setUsername(user.getUsername());
         userService.updateUser(the_user);
         model.addAttribute("users", userService.getUsers());
-        return "Auth/users";
+        return "auth/users";
     }
+
+    @GetMapping("/users")
+    public String showUsers(Model model){
+        if (!userRepository.findAll().isEmpty())
+            model.addAttribute("users", userService.getUsers());
+        else
+            model.addAttribute("msg", "No users found!");
+        return "auth/users";
+    }
+
+    @GetMapping("/user/{user_id}")
+    public String showUser(@PathVariable Long user_id, Model model){
+        var existing = userRepository.findById(user_id).orElse(null);
+        if (existing != null)
+            model.addAttribute("user", userService.getUser(user_id));
+        else
+            model.addAttribute("msg", "User not found!");
+        return "auth/user";
+    }
+
+    @PostMapping("/myprofile")
+    public String MyProfile(@PathVariable Model model, @AuthenticationPrincipal UserDetailsImpl auth){
+        model.addAttribute("user", userService.getUser(auth.getId()));
+        return "";
+    }
+
+
 }
